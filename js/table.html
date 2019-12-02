@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Table</title>
+</head>
+<body>
+    <form id="form">
+<label><input type="text" id="rows" value="" style="font-family: Verdana; font-size: 12px; margin-left: 15px; width: 50px;">Количество строк</label></br>
+<label><input type="text" id="columns" value="" style="font-family: Verdana; font-size: 12px; margin-left: 15px; width: 50px;">Количество столбцов</label></br>
+<!--<label><input type="text" id="table-width" value="" style="font-family: Verdana; font-size: 12px; margin-left: 15px; width: 50px;">Ширина таблицы </label></br> !-->
+
+</form>
+<!--<p><label><input type="checkbox" id="checkbox" value="Рамка" style="margin-left: 15px">Рамка</label></p> !-->
+<button id="hider" onclick="addTable();" margin: 5px 15px>Create table</button>
+<button id="create" onclick="destroyTable();" margin: 5px 15px>Destroy table</button>
+
+<script>
+function tableadd(){
+  document.write("<div><input type='text' onInput='changeWidthText()'></input> Изменить ширину" + "<select onChange='changeWidthText()'><option>solid</option><option>dotted</option>"
+            + "<option>dashed</option><option>double</option></select> границы <input type='button'"
+            + "onclick='changeWidth()' value=changeWidthText></input></div>");
+  
+  document.write("<div> Добавить заголовок  <input type='text'></input>"
+            + "<input type='button' onclick='addHeader()' value=Add header></input></div>");
+   
+  document.write("<div> Удалить ряд <input type='text'></input>"
+            + "<input type='button' onclick='deleteRow()' value=Delete row></input></div>");
+             
+  document.write("<div><input type='button' onclick='magic()' value=Magic></input></div>");
+    }
+    tableadd();
+    function addTable() {
+         document.getElementById('form').hidden = true;
+         var body = document.querySelector("body"),
+            tableWidth = document.getElementById("table-width"),
+            numRows = document.getElementById("rows"),
+            numColumns = document.getElementById("columns"),
+            rows = numRows.value,
+            columns = numColumns.value,
+            tr = "",
+            td = "",
+            firstTable = document.querySelector("table");
+        table = document.createElement("table"),
+
+        tbody = document.createElement("tbody"),
+        
+        table.setAttribute("id", "mytable");
+        var id=0;
+        for (var i = 0; i < rows; i++) {
+            tr = document.createElement("tr");
+            for (var j = 0; j < columns; j++) {
+                td = document.createElement("td");
+                var element = document.createElement("textarea");
+                element.setAttribute("class", "area");
+                var btn = document.createElement("input");
+                btn.setAttribute("type", "button");
+                btn.setAttribute("class", "but");
+                btn.setAttribute("value", "сохранить");
+                btn.setAttribute("id", id);
+                id++;
+                btn.setAttribute("onclick", "Hidetextarea(id);");
+                td.appendChild(element);
+                td.setAttribute("id", id);
+                td.setAttribute("class", "td");
+                td.appendChild(btn);
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+            table.appendChild(tbody);
+        }
+        return body.appendChild(table);
+        }
+   function Hidetextarea(id) {
+      text = document.querySelectorAll('.area')[id].value,
+      p = document.createElement("p");
+      td = document.querySelectorAll('.td')[id],
+      td.appendChild(p);
+      document.getElementsByTagName("p")[id].innerHTML = text;
+      document.querySelectorAll('.area')[id].hidden = true;
+      document.querySelectorAll('.but')[id].hidden = true;
+    }
+    function addHeader() {
+        let header = document.getElementsByTagName("div")[1].children[0].value
+        document.getElementsByTagName("tbody")[0].innerHTML = "<tr><th>" + header + "</th></tr>"
+            + document.getElementsByTagName("tbody")[0].innerHTML;
+    }
+   function destroyTable() {
+       document.getElementById('form').hidden = false;
+        var table = document.querySelector("table"),
+            tableWidth = document.getElementById("table-width"),
+            numRows = document.getElementById("rows"),
+            numColumns = document.getElementById("columns");
+            document.body.removeChild(table);
+            tableWidth.value = null;
+            numRows.value = null;
+            numColumns.value = null;
+    } 
+         function changeWidth() {
+            let width = document.getElementsByTagName("div")[0].children[0].value;
+            let border = document.getElementsByTagName("div")[0].children[1].value;
+            document.getElementsByTagName("table")[0].style = "width: " + width
+                + "px; border: 2px " + border + ' black;';
+        }
+        function changeWidthText() {
+            let width = document.getElementsByTagName("div")[0].children[0].value;
+            let border = document.getElementsByTagName("div")[0].children[1].value;
+            document.getElementsByTagName("div")[0].children[2].value = "Submit with width " + width
+                + "px and " + border + " border";
+        }
+        function deleteRow() {
+            let row = document.getElementsByTagName("div")[2].children[0].value;
+            let tableRows = document.getElementsByTagName("tbody")[0].children.length;
+            try {
+                document.getElementsByTagName("tbody")[0].children[row - 1].remove();
+            }
+            catch {
+                alert("400 Bad Request");
+            }
+        }
+        function magic() {
+            let row = Math.floor(Math.random() * document.getElementsByTagName("table")[0]
+                .children[0].children.length);
+            let column = Math.floor(Math.random() * document.getElementsByTagName("table")[0]
+                .children[0].children[row].children.length);
+            let cellText = document.getElementsByTagName("table")[0].children[0]
+                .children[row].children[column];
+            let color1 = Math.floor(Math.random() * 256);
+            let color2 = Math.floor(Math.random() * 256);
+            let color3 = Math.floor(Math.random() * 256);
+            switch (Math.ceil(Math.random() * 4)) {
+                case 1:
+                    cellText.style = "color: rgb(" + color1 + ", " + color2 + ", " + color3 + ")";
+                    for (var i = 0; i < cellText.children.length; i++)
+                        cellText.children[i].style = "color: rgb(" + color1 + ", " + color2
+                            + ", " + color3 + ")";
+                    break;
+                case 2:
+                    cellText.style = "background-color: rgb(" + color1 + ", " + color2
+                        + ", " + color3 + ")";
+                    for (var i = 0; i < cellText.children.length; i++)
+                        cellText.children[i].style = "background-color: rgb(" + color1 + ", " + color2
+                            + ", " + color3 + ")";
+                    break;
+                case 3:
+                    cellText.style = 'font-size: ' + Math.ceil(Math.random() * 11 + 14) + 'pt;';
+                    for (var i = 0; i < cellText.children.length; i++)
+                        cellText.children[i].style = 'font-size: ' + Math.ceil(Math.random() * 11 + 14)
+                            + 'pt;';
+                    break;
+                case 4:
+                    cellText.remove();
+                    break;
+            }
+        }
+</script>
+</body>
+</html>
