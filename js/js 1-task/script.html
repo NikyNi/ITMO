@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=>, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>javascript</title>
+    <link rel="stylesheet" type="text/css" href="color.css" />
+    <style>
+        .pic {
+            background-image: url("https://img.icons8.com/emoji/48/000000/cherry-blossom.png");
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            background-size: 20px;
+            background-position: left top;
+            text-indent: 20px;
+        }
+    
+        .pic:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+<script type="text/javascript">
+</script>
+<!-- из-за тега script -->
+<script type="text/javascript">
+    document.write('hello world');
+</script>
+<br>
+<script>
+    /*task1*/
+    let str ='hello world';
+    let words=1;
+     for (let i = 0; i < str.length; i++) {
+            if (str[i] == ' ') {
+                words += 1;
+            }
+        }
+    document.write('words ' + words);
+    </script>
+    <br>
+    <script>
+    let letters=0;
+     for (let i = 0; i < str.length; i++) {
+            if (str[i] != ' ') {
+                letters += 1;
+            }
+        }
+        document.write('letters ' + letters);
+   </script>
+<br>
+
+<script>
+    var URL = window.location;
+   document.write(URL);
+</script>
+<br>
+<script>
+   var path = window.location.pathname;
+   var name = path.split("/").pop();
+   document.write('filename: ' + name );
+</script>
+<br>
+<script>
+    var path = window.location.pathname;
+    var html = path.split(".").pop();
+    document.write('expansion: ' + html);
+</script>
+<br>
+<p>task2</p>
+<a name="anchor1">anchor1</a>
+<a name="anchor2">anchor2</a>
+<a href="http://vk.com"></a>
+<a href="http://youtube.com">YouTube</a>
+<a href="http://yandex.ru">Yandex</a>
+<a href="http://facebook.com">Facebook</a>
+<img id="pic1" src="..\3.jpg" height="42" width="27" alt="pic" />
+<img id="pic2" src="..\2.jpg" height="50" width="30" alt="pic" />
+<script>
+    let maxWidth = 0;
+    let sumOfHeights = 0;
+    for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
+        if (document.getElementsByTagName('img')[i].width > maxWidth)
+            maxWidth = document.getElementsByTagName('img')[i].width;
+        sumOfHeights += document.getElementsByTagName('img')[i].height;
+    }
+    document.write("<div/>Number of anchors " + document.querySelectorAll("a[name]").length
+        + "<div/>The first is " + document.querySelectorAll("a[name]")[0].innerHTML
+        + "<div/>Number of refs " + document.querySelectorAll("a[href]").length
+        + "<div/>Number of imgs " + + document.getElementsByTagName('img').length
+        + "<div/>The width of first " + document.getElementsByTagName('img')[0].width
+        + "<div/>The max width " + maxWidth + "<div/>The sum of heights " + sumOfHeights);
+   </script>
+   <p> task3 </p>
+   <script>
+   for (var i = 0; i < 10; i++) {
+        document.write("<form name='" + (i + 1) + "'>"
+            + "<input type='button' class='pic' value='Show name of form'"
+            + "onClick='alert(&quot;Show name of form&quot;)'></input>"
+            + "<input type='button' class='pic' value='Affiliation'"
+            + "onClick='alert(" + (i + 1) + ")'></input>"
+            + "<input type='text'></input>"
+            + "<input type='button' class='pic' value='Reset'"
+            + "onClick='document.getElementsByName(" + (i + 1) + ")[0].reset()'></input>"
+            + "<input type='button' class='pic' value='Amount of fields'"
+            + "onClick='alert(document.getElementsByName(" + (i + 1) + ")[0].elements.length)'></input>"
+            + "</form>");
+    }
+    document.write("<div/>" + document.getElementsByTagName('form')[1].name);
+    for (var i = 3; i < document.getElementsByTagName('form').length; i += 2) {
+        document.write(", " + document.getElementsByTagName('form')[i].name);
+    }
+   
+</script>
+
+
+</body>
+</html>
