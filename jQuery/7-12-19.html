@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".style").css("fontSize", "25px");
+            $(".style").css("color", "blue");
+            $(".style1").css("fontWeight", "bold");
+            $("form *").attr("disabled", true);
+
+
+            $("a").prepend("↗");
+            $("a").attr("target", "_blank");
+            $("[href^='http://']").each(function () {
+                $(this).attr("href", $(this).attr("href").replace("http://", "https://"));
+            });
+            $("#click").click(function () {
+                $("a").each(function () {
+                    $(this).contents().eq(0).remove();
+                });
+                $("a").removeAttr("target");
+            });
+            
+
+            $("#FadeOut").click(function () {
+                $("#ef1").fadeOut();
+            });
+            $("#SlideUp").click(function () {
+                $("#ef2").slideUp("slow");
+            });
+            $("#Animate").click(function () {
+                $("#ef3").animate({ opacity: 0.4 });
+            });
+            $("#hide").click(function () {
+                $("#ef4").hide();
+            });
+            $("#SlideToggle").click(function () {
+                $("#ef5").slideToggle("slow");
+            });
+            $("#refresh").click(function () {
+                $("#result1").load("https://inxaoc.github.io/example/ajax-1.html");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input id="click" type="button" value="ОТМЕНА" style="float:right">
+   <p>Задание 1</p>   
+   <p class="style"> Так меняются </p>
+   <p class="style1"> параграфы </p>
+   <a href="https://vk.com/doc20232844_524972746?hash=b06e7acd2b2a757818&dl=e10e48acb4736221d4" class="style"> А так меняются</a> <br>
+   <a href="https://vk.com/doc20232844_524972746?hash=b06e7acd2b2a757818&dl=e10e48acb4736221d4" class="style1"> ссылки</a>
+   <a href="http://www.stephenking.ru/sk_biblio.php" class="style1">!!!</a>
+   <form class="form" method="post" action="submit.html">
+        <p>
+            <label for="name1" class="label">Сюда ничего не ввести:(</label>
+            <input type="text" name="nothing" id="noth">
+        </p>
+        <p>
+            <label for="name2" class="label">Сюда не нажать</label>
+            <input type="button" value="push">
+        </p>
+    </form>
+
+
+    <table>
+        <th>Текст</th>
+        <th>Эффект/анимация</th>
+        <tr>
+            <td id="ef1">FadeOut</td>
+            <td><input id="FadeOut" type="button" value="Go"></td>
+        </tr>
+        <tr>
+            <td id="ef2">SlideUp</td>
+            <td><input id="SlideUp" type="button" value="Go"></td>
+        </tr>
+    <tr>
+            <td id="ef3"> Animate</td>
+            <td><input id="Animate" type="button" value="Go"></td>
+        </tr>
+        <tr>
+            <td id="ef4">Hide</td>
+            <td><input id="hide" type="button" value="Go"></td>
+        </tr>
+    <tr>
+        <td id="ef5">SlideToggle</td>
+        <td><input id="SlideToggle" type="button" value="Go"></td>
+    </tr>
+    </table>
+</body>
+
+</html>
